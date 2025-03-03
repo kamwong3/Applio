@@ -4,8 +4,10 @@ services:
     image: applio
     shm_size: 8g
     network_mode: "host"
+    ports:
+      - 6969:6969
     working_dir: /app
-    command: python3 app.py
+    command: python3 app.py --server-name 0.0.0.0
     volumes:
       - .:/app
     deploy:
