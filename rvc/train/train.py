@@ -465,6 +465,8 @@ def run(
     except:
         epoch_str = 1
         global_step = 0
+
+    try:
         if pretrainG != "" and pretrainG != "None":
             if rank == 0:
                 verify_checkpoint_shapes(pretrainG, net_g)
@@ -497,6 +499,8 @@ def run(
                         "model"
                     ]
                 )
+    except:
+        print("Training error")
 
     # Initialize schedulers
     scheduler_g = torch.optim.lr_scheduler.ExponentialLR(

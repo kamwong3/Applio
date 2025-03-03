@@ -41,9 +41,11 @@ def load_checkpoint(checkpoint_path, model, optimizer=None, load_opt=1):
         optimizer (torch.optim.Optimizer, optional): The optimizer to load the state from. Defaults to None.
         load_opt (int, optional): Whether to load the optimizer state. Defaults to 1.
     """
-    assert os.path.isfile(
-        checkpoint_path
-    ), f"Checkpoint file not found: {checkpoint_path}"
+    # assert os.path.isfile(
+    #     checkpoint_path
+    # ), f"Checkpoint file not found: {checkpoint_path}"
+    if not checkpoint_path:
+        raise Exception("Checkpoint file not found: {checkpoint_path}") 
 
     checkpoint_dict = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
     checkpoint_dict = replace_keys_in_dict(
